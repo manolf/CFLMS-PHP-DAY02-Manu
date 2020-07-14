@@ -163,7 +163,7 @@ echo "<br>";
 // mysqli_close($conn);
 
 echo "<br><br>";
-echo "<b>Exercise 8: Display records</b>";
+echo "<b>Exercise 8: Display, delete and update records</b>";
 echo "<br>";
 
 //Connection part start
@@ -184,7 +184,7 @@ $sql = "SELECT user_id, lastname, firstname, email FROM Users";
 $result = mysqli_query($conn, $sql);
 // fetch the next row (as long as there are any) into $row
 while($row = mysqli_fetch_assoc($result)) {
-       printf("ID=%s %s %s (%s)<br>",
+       printf("ID=%s %s %s (%s)<a class='btn btn-success' target='_blank' href='delete_user.php?id=".$row['user_id']."'>Delete User</a> <a class='btn btn-warning' target='_blank' href='update_user.php?id=".$row['user_id']."'>Update User</a><br>",
                      $row[ "user_id"], $row["lastname"],$row["firstname"],$row["email"]);
 }
 echo  "Fetched data successfully\n";
@@ -193,25 +193,6 @@ mysqli_free_result($result);
 
 //Closing Database Connection
 mysqli_close($conn);
-
-echo "<br><br>";
-echo "<b>Exercise 9: Update data with form</b>";
-echo "<br>";
-
-
-
-
-
-
-// PART 5: delete table
-// $sql = "DROP TABLE Users";
-// if (mysqli_query($conn, $sql)) {
-//     echo "Table Users deleted successfully" . "\n";
-// } else  {
-//    echo "Error deleting table: " . mysqli_error($conn) . "\n" ;
-// }
-
-
 
 
 ?>
