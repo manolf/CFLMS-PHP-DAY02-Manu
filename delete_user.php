@@ -24,6 +24,10 @@
     $password = "";
     $dbname = "caruniverse";
 
+
+    if (isset($_POST['submit'])) {
+        if ($_POST["divident"] && $_POST["divisor"]) {
+
     $conn = mysqli_connect($servername, $username, $password, $dbname);
     // Check connection
     if (!$conn) {
@@ -35,6 +39,7 @@
 
     //user_id from Exercise 8 where record has to be deleted
     $user_id = $_GET['id'];
+    echo "userID: $user_id";
 
 
     // sql to delete a record from the Users table

@@ -17,39 +17,77 @@
         </form>
     </nav>
 
+
+<h2>Update userdata</h2>
+<form action="update_user.php" method ="post">
+   
+       <label  for="firstName">First Name:</label>
+       <input type="text" name= "firstname" id="firstName">
+   </p >
+   <p>
+       <label for ="lastName">Last Name:</label>
+       <input  type="text" name="lastname"  id="lastName">
+   </p>
+   <p>
+       <label for= "emailAddress">Email Address:</label>
+       <input  type="text" name= "email" id="emailAddress">
+   </p>
+   <input type="submit" name="submit" />
+</form>
+
+
     <?php
-    //Connection part start
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "caruniverse";
+$user_id = $_GET['id'];
+echo "userID: $user_id";
+if (isset($_POST['submit'])) {
+ 
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
-    // Check connection
-    if (!$conn) {
-        die("Connection failed: " . mysqli_connect_error() . "\n");
-    }
-    echo "Connected successfully<br>";
-
-    //Connection part end
-
-    //user_id from Exercise 8 where record has to be updated
-    $user_id = $_GET['id'];
-
-
-    // sql to delete a record from the Users table
-    $sql = "SELECT user_id, lastname, firstname, email FROM Users";
+   // Connection part start
+   $servername = "localhost";
+   $username = "root";
+   $password = "";
+   $dbname = "caruniverse";
+   
+   $conn = mysqli_connect($servername, $username, $password, $dbname);
+   // Check connection
+   if (!$conn) {
+      die("Connection failed: " . mysqli_connect_error(). "\n");
+   }
+   echo "Connected successfully<br>";
+   echo "userID: $user_id";
+   //Connection part end
 
 
 
-    if (mysqli_query($conn, $sql)) {
-        echo "<h1 class='text-success' >User with ID = ($user_id) was updated.</h1>";
-    } else {
-        echo "<p>Record creation error for: </p>" . 
-             "<p>"  . $sql . "</p>" . 
-             mysqli_error($conn);
-    }
-    mysqli_close($conn);
+
+// Escape user inputs for security
+$first_name = mysqli_real_escape_string($conn, $_POST['firstname']);
+$last_name = mysqli_real_escape_string($conn, $_POST[ 'lastname']);
+$email = mysqli_real_escape_string($conn, $_POST['email']);
+
+
+    
+$sql = "UPDATE users SET firstname = '$first_name', lastname = '$last_name', email = '$email'
+WHERE user_id = $user_id";
+// $sql = "INSERT INTO Users (firstname, lastname, email) VALUES ('$first_name', '$last_name', '$email')";
+
+if (mysqli_query($conn, $sql)) {
+    echo "<h1 class='text-success'>record updated.<h1>";
+} else {
+    echo "<h1>Record creation error for: </h1>" .
+         "<p>"  . $sql . "</p>" .
+         mysqli_error($conn);
+}
+
+//Closing Database Connection
+mysqli_close($conn);
+
+}
+
+
+
+
+
 
 
     ?>
