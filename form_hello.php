@@ -20,5 +20,5 @@ echo "You are " . $_POST['age']. " years old.";
 }
 }
 ?>
-</ body>
+</body>
 </html>

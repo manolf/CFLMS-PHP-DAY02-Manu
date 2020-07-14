@@ -184,7 +184,7 @@ $sql = "SELECT user_id, lastname, firstname, email FROM Users";
 $result = mysqli_query($conn, $sql);
 // fetch the next row (as long as there are any) into $row
 while($row = mysqli_fetch_assoc($result)) {
-       printf("ID=%s %s %s (%s)<a class='btn btn-success' target='_blank' href='delete_user.php?id=".$row['user_id']."'>Delete User</a> <a class='btn btn-warning' target='_blank' href='update_user.php?id=".$row['user_id']."'>Update User</a><br>",
+       printf("ID=%s %s %s (%s)<a class='btn btn-danger' target='_blank' href='delete_user.php?id=".$row['user_id']."'>Delete User</a> <a class='btn btn-warning' target='_blank' href='update_user.php?id=".$row['user_id']."'>Update User</a><br>",
                      $row[ "user_id"], $row["lastname"],$row["firstname"],$row["email"]);
 }
 echo  "Fetched data successfully\n";
